@@ -1,0 +1,17 @@
+RewriteEngine On
+
+# Serve correct MIME types explicitly
+<FilesMatch "\.(js|mjs)$">
+    ForceType application/javascript
+    Header set Content-Type "application/javascript"
+</FilesMatch>
+
+<FilesMatch "\.css$">
+    ForceType text/css
+    Header set Content-Type "text/css"
+</FilesMatch>
+
+# Handle SPA routing
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
