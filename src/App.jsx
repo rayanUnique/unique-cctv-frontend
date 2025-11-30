@@ -46,44 +46,20 @@ function AppContent() {
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/book-appointment" element={<AppointmentBooking />} />
             
-            {/* Protected Routes - Require login */}
-            <Route 
-              path="/products" 
-              element={
-                <ProtectedRoute>
-                  <Products />
-                </ProtectedRoute>
-              } 
-            />
-            
-            <Route 
-              path="/contact" 
-              element={
-                <ProtectedRoute>
-                  <Contact />
-                </ProtectedRoute>
-              } 
-            />
-
+            {/* Protected Routes - Require login but not specific role */}
             <Route 
               path="/profile" 
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireAuth={true}>
                   <UserProfile />
                 </ProtectedRoute>
               } 
             />
 
-             <Route 
-              path="/book-appointment" 
-              element={
-                <ProtectedRoute>
-                  <AppointmentBooking />
-                </ProtectedRoute>
-              } 
-            />
-  
             {/* Admin Only Routes */}
             <Route 
               path="/admin/*" 
@@ -100,13 +76,13 @@ function AppContent() {
               <p>The page you're looking for doesn't exist.</p>
             </div>} />
           </Routes>
+          <Route path="/unauthorized" element={<Unauthorized />} />
         </div>
       </main>
       <Footer />
     </div>
   )
 }
-
 
 function App() {
   return (

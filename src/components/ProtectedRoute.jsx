@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const ProtectedRoute = ({ children, requireAdmin = false }) => {
+const ProtectedRoute = ({ children, requireAdmin = false, requireAuth = false }) => {
   const { isAuthenticated, isAdmin, loading } = useAuth();
   const location = useLocation();
 
@@ -16,14 +16,16 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
     );
   }
 
-  if (!isAuthenticated) {
+  // If authentication is required but user is not authenticated
+  if (requireAuth && !isAuthenticated) {
     // Redirect to login page with return url
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   // Check if admin access is required but user is not admin
   if (requireAdmin && !isAdmin) {
-    return <Navigate to="/" replace />;
+    // Redirect non-admin users to home page or unauthorized page
+    return <Navigate to="/unauthorized" replace />;
   }
 
   return children;

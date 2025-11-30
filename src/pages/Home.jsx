@@ -203,7 +203,7 @@ const Home = () => {
       icon: 'bi-person-check',
       title: 'Experienced & Skilled Technicians',
       description: 'Highly trained professionals with industry expertise',
-      badge: 'Experienced',
+      badge: 'Team',
       color: 'warning'
     },
     {
