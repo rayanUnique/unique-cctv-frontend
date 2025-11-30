@@ -25,7 +25,7 @@ const ProtectedRoute = ({ children, requireAdmin = false, requireAuth = false })
   // Check if admin access is required but user is not admin
   if (requireAdmin && !isAdmin) {
     // Redirect non-admin users to home page or unauthorized page
-    return <Navigate to="/unauthorized" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return children;

@@ -24,17 +24,6 @@ const Header = () => {
     return location.pathname === path;
   };
 
-  // Function to handle protected route clicks
-  const handleProtectedClick = (path, e) => {
-    if (!isAuthenticated) {
-      e.preventDefault();
-      navigate('/login', { state: { from: location } });
-    }
-  };
-
-  // Check if user has ROLE_USER (not admin)
-  const isRegularUser = isAuthenticated && !isAdmin;
-
   return (
     <Navbar expand="lg" fixed="top" className="professional-navbar mobile-optimized">
       <Container fluid="lg">
@@ -70,28 +59,20 @@ const Header = () => {
               </Nav.Link>
             </Nav.Item>
             
-           
-            
-            {/* Products - Protected but accessible to both users and admins */}
+            {/* Products - Accessible to everyone */}
             <Nav.Item>
               <Nav.Link 
-                as={isAuthenticated ? Link : 'span'}
-                to={isAuthenticated ? "/products" : "#"}
-                className={`nav-item-custom ${isActive('/products') ? 'active' : ''} ${
-                  !isAuthenticated ? 'protected-link' : ''
-                }`}
-                onClick={!isAuthenticated ? (e) => handleProtectedClick('/products', e) : undefined}
+                as={Link}
+                to="/products"
+                className={`nav-item-custom ${isActive('/products') ? 'active' : ''}`}
               >
                 <span className="nav-icon">📷</span>
-                <span className="nav-text">
-                  Products
-                  {!isAuthenticated && <small className="ms-1 text-warning">🔒</small>}
-                </span>
+                <span className="nav-text">Products</span>
                 <span className="nav-underline"></span>
               </Nav.Link>
             </Nav.Item>
 
-             {/* About - Always accessible */}
+            {/* About - Always accessible */}
             <Nav.Item>
               <Nav.Link 
                 as={Link} 
@@ -104,35 +85,31 @@ const Header = () => {
               </Nav.Link>
             </Nav.Item>
             
-            {/* Contact - Only for regular users (not admin) */}
-            {isRegularUser && (
-              <Nav.Item>
-                <Nav.Link 
-                  as={Link}
-                  to="/contact"
-                  className={`nav-item-custom ${isActive('/contact') ? 'active' : ''}`}
-                >
-                  <span className="nav-icon">📞</span>
-                  <span className="nav-text">Contact</span>
-                  <span className="nav-underline"></span>
-                </Nav.Link>
-              </Nav.Item>
-            )}
+            {/* Contact - Accessible to everyone */}
+            <Nav.Item>
+              <Nav.Link 
+                as={Link}
+                to="/contact"
+                className={`nav-item-custom ${isActive('/contact') ? 'active' : ''}`}
+              >
+                <span className="nav-icon">📞</span>
+                <span className="nav-text">Contact</span>
+                <span className="nav-underline"></span>
+              </Nav.Link>
+            </Nav.Item>
 
-            {/* Book Appointment - Only for regular users (not admin) */}
-            {isRegularUser && (
-              <Nav.Item>
-                <Nav.Link 
-                  as={Link}
-                  to="/book-appointment"
-                  className={`nav-item-custom appointment-link ${isActive('/book-appointment') ? 'active' : ''}`}
-                >
-                  <span className="nav-icon">📅</span>
-                  <span className="nav-text">Book Appointment</span>
-                  <span className="nav-underline"></span>
-                </Nav.Link>
-              </Nav.Item>
-            )}
+            {/* Book Appointment - Accessible to everyone */}
+            <Nav.Item>
+              <Nav.Link 
+                as={Link}
+                to="/book-appointment"
+                className={`nav-item-custom appointment-link ${isActive('/book-appointment') ? 'active' : ''}`}
+              >
+                <span className="nav-icon">📅</span>
+                <span className="nav-text">Book Appointment</span>
+                <span className="nav-underline"></span>
+              </Nav.Link>
+            </Nav.Item>
 
             {/* Admin Dashboard Link - Only for admins */}
             {isAdmin && (
@@ -169,13 +146,11 @@ const Header = () => {
                   My Profile
                 </NavDropdown.Item>
 
-                {/* Book Appointment in dropdown - Only for regular users */}
-                {isRegularUser && (
-                  <NavDropdown.Item as={Link} to="/book-appointment" className="dropdown-item-custom">
-                    <i className="bi bi-calendar-plus me-2"></i>
-                    Book Appointment
-                  </NavDropdown.Item>
-                )}
+                {/* Book Appointment in dropdown - Accessible to all logged-in users */}
+                <NavDropdown.Item as={Link} to="/book-appointment" className="dropdown-item-custom">
+                  <i className="bi bi-calendar-plus me-2"></i>
+                  Book Appointment
+                </NavDropdown.Item>
                 
                 {/* Admin Dashboard in dropdown - Only for admins */}
                 {isAdmin && (

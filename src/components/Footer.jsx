@@ -6,9 +6,6 @@ import { useAuth } from '../context/AuthContext'
 const Footer = () => {
   const { isAuthenticated, isAdmin } = useAuth()
 
-  // Check if user has ROLE_USER (not admin)
-  const isRegularUser = isAuthenticated && !isAdmin
-
   return (
     <footer className="professional-footer">
       <Container>
@@ -32,16 +29,9 @@ const Footer = () => {
             <div className="footer-links">
               <Link to="/" className="footer-link d-block d-md-inline-block mx-2 my-1 my-md-0">Home</Link>
               <Link to="/about" className="footer-link d-block d-md-inline-block mx-2 my-1 my-md-0">About</Link>
-              
-              {/* Products - Show to all authenticated users */}
-              {isAuthenticated && (
-                <Link to="/products" className="footer-link d-block d-md-inline-block mx-2 my-1 my-md-0">Products</Link>
-              )}
-              
-              {/* Contact - Only show to regular users (not admin) */}
-              {isRegularUser && (
-                <Link to="/contact" className="footer-link d-block d-md-inline-block mx-2 my-1 my-md-0">Contact</Link>
-              )}
+              <Link to="/products" className="footer-link d-block d-md-inline-block mx-2 my-1 my-md-0">Products</Link>
+              <Link to="/contact" className="footer-link d-block d-md-inline-block mx-2 my-1 my-md-0">Contact</Link>
+              <Link to="/book-appointment" className="footer-link d-block d-md-inline-block mx-2 my-1 my-md-0">Book Appointment</Link>
               
               {/* Admin Dashboard - Only show to admin users */}
               {isAdmin && (
