@@ -15,13 +15,17 @@ const ProductCard = ({ product }) => {
       return pathString;
     }
     
-    // If it starts with /api/images/, create full backend URL
-    if (pathString.startsWith('/api/images/')) {
-      return `http://localhost:8080${pathString}`;
-    }
-    
-    // If it's just a file name, create full backend URL
-    return `http://localhost:8080/api/images/${pathString}`;
+   // If it starts with /api/images/, create full backend URL
+if (pathString.startsWith('/api/images/')) {
+  const fullUrl = `https://unique-cctv-backend.onrender.com${pathString}`;
+  console.log('🖼️ Converted to full URL:', fullUrl);
+  return fullUrl;
+}
+
+// If it's just a file name, create full backend URL  
+const fullUrl = `https://unique-cctv-backend.onrender.com/api/images/${pathString}`;
+console.log('🖼️ Filename converted to URL:', fullUrl);
+return fullUrl;
   };
 
   // ✅ CORRECT: Use the new image field

@@ -29,11 +29,17 @@ const ProductForm = ({ product, onSave, onCancel, onError }) => {
       return pathString;
     }
     
-    if (pathString.startsWith('/api/images/')) {
-      return `http://localhost:8080${pathString}`;
-    }
-    
-    return `http://localhost:8080/api/images/${pathString}`;
+    // If it starts with /api/images/, create full backend URL
+if (pathString.startsWith('/api/images/')) {
+  const fullUrl = `https://unique-cctv-backend.onrender.com${pathString}`;
+  console.log('🖼️ Converted to full URL:', fullUrl);
+  return fullUrl;
+}
+
+// If it's just a file name, create full backend URL  
+const fullUrl = `https://unique-cctv-backend.onrender.com/api/images/${pathString}`;
+console.log('🖼️ Filename converted to URL:', fullUrl);
+return fullUrl;
   };
 
   useEffect(() => {
@@ -114,13 +120,13 @@ const ProductForm = ({ product, onSave, onCancel, onError }) => {
         const uploadFormData = new FormData();
         uploadFormData.append('file', imageFile);
         
-        const uploadResponse = await fetch('http://localhost:8080/api/upload/image', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          },
-          body: uploadFormData
-        });
+       const uploadResponse = await fetch('https://unique-cctv-backend.onrender.com/api/upload/image', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  },
+  body: uploadFormData
+});
 
         if (!uploadResponse.ok) {
           throw new Error('Image upload failed');

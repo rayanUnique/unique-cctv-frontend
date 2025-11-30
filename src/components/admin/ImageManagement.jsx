@@ -56,14 +56,14 @@ const debugUpload = async () => {
 
     console.log('📤 Making direct fetch request...');
     
-    const response = await fetch('http://localhost:8080/api/upload/image', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`
-        // Don't set Content-Type - let browser set it for FormData
-      },
-      body: formData
-    });
+    const response = await fetch('https://unique-cctv-backend.onrender.com/api/upload/image', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`
+    // Don't set Content-Type - let browser set it for FormData
+  },
+  body: formData
+});
 
     console.log('📨 Response status:', response.status);
     console.log('📨 Response headers:', Object.fromEntries(response.headers.entries()));

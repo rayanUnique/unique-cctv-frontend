@@ -52,11 +52,11 @@ const Products = () => {
     
     // If it starts with /api/images/, create full backend URL
     if (pathString.startsWith('/api/images/')) {
-      return `http://localhost:8080${pathString}`;
+      return `https://unique-cctv-backend.onrender.com${pathString}`;
     }
     
     // If it's just a file name, create full backend URL
-    return `http://localhost:8080/api/images/${pathString}`;
+    return `https://unique-cctv-backend.onrender.com/api/images/${pathString}`;
   };
 
   const filterProducts = () => {

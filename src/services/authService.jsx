@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/auth';
+const API_URL = 'https://unique-cctv-backend.onrender.com/api/auth';
 
 const api = axios.create({
   baseURL: API_URL,
