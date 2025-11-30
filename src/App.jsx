@@ -15,6 +15,7 @@ import AdminDashboard from './components/admin/AdminDashboard'
 import AppointmentBooking from './components/AppointmentBooking'
 import ProtectedRoute from './components/ProtectedRoute'
 import AuthDebugger from './components/AuthDebugger'
+import Unauthorized from './pages/Unauthorized';
 import './App.css'
 
 function AppContent() {
